@@ -3,8 +3,8 @@
 #include "queue.h" 
 #include "stack.h"
 
-//#define 		STACK
 #define			QUEUE
+//#define 		STACK
 
 int main(void)
 {
@@ -79,7 +79,7 @@ int main(void)
 	*/
 	
 		
-	err = dealocate_stack(&sp);
+	err = deallocate_stack(&sp);
 	if( err == -1)
 		return 0;
 	

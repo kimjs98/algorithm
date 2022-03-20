@@ -12,7 +12,7 @@ void push_st(stack_t* stack, const int data);
 int pop_st(stack_t* stack);
 int top_st(stack_t* stack);
 
-
+stack_t* allocate_stack(void);
 int deallocate_stack(stack_t** stack);
 
 
