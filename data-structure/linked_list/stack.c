@@ -71,3 +71,4 @@ int top_st(stack_t* stack)
 	return current_sp->link->data;	
 }
 
+

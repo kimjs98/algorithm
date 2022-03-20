@@ -1,4 +1,3 @@
-
 #include "linked_list.h"
 
 static linked_list_t* _allocate_node(void)		// 노드 메모리 할당 함수
@@ -17,10 +16,12 @@ static void _deallocate_node(linked_list_t** node)
 	if( (node == NULL) || (*node == NULL) ) 
 	{
 		printf("node deallocation error\n");
-		return NULL;
+		exit(1);
+		//return NULL;
 	}	
 	free(*node);	
-	*node = NULL;	
+	*node = NULL;
+
 }
 
 linked_list_t* init_header_node(void) 	// 헤더 노드 생성 함수  

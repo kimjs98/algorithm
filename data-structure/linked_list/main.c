@@ -1,11 +1,10 @@
 
 #include "linked_list.h"
-#include "stack.h"
 #include "queue.h" 
+#include "stack.h"
 
 //#define 		STACK
 #define			QUEUE
-
 
 int main(void)
 {
@@ -43,8 +42,6 @@ int main(void)
 	err = deallocate_queue(&queue);
 	if( err == -1)
 		return 0;	
-	
-
 #endif
 	
 #ifdef STACK	
@@ -55,7 +52,6 @@ int main(void)
 	//head = init_header_node();
 	
 	stack_t* sp = allocate_stack(); 
-	
 	
 	push_st(sp, 1);
 	push_st(sp, 2);
@@ -86,8 +82,6 @@ int main(void)
 	err = dealocate_stack(&sp);
 	if( err == -1)
 		return 0;
-	
-		
 	
 #endif
 
