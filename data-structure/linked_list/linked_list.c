@@ -44,6 +44,7 @@ linked_list_t* insert_node(linked_list_t* node, const int num) // 노드 생성 함수
 	
 	return new_node;
 }
+
 void delete_node(linked_list_t* node)	// 노드 삭제 함수(헤더 다음 노드 삭제) 
 {
 	linked_list_t* delete_node;				//	기준 노드 	
@@ -55,10 +56,6 @@ void delete_node(linked_list_t* node)	// 노드 삭제 함수(헤더 다음 노드 삭제)
 	_deallocate_node(&delete_node);
 }
 
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////
 void free_rest_node(linked_list_t* node) 	// 남아있는 head가 가리키는  주소 넘겨줌.  
 {
 	linked_list_t* free_node;
@@ -89,5 +86,5 @@ void print_rest_node(linked_list_t* head)
 		current_node = current_node->link;		
 	}	
 }
-//////////////////////////////////////////////////////////////////////////////////////
+
 

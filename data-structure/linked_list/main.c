@@ -1,4 +1,3 @@
-
 #include "linked_list.h"
 #include "queue.h" 
 #include "stack.h"
@@ -26,19 +25,28 @@ int main(void)
 		return 0;
 	else
 		printf("pop data : %d\n",err);
+	
+	
+	err = pop_q(queue);
+	if( err == -1)
+		return 0;
+	else
+		printf("pop data : %d\n",err);	
+	
 		
 	err = front(queue);
 	if( err == -1)
 		return 0;
 	else
 		printf("front data : %d\n",err);
-
+	
+	
 	err = back(queue);
 	if( err == -1)
 		return 0;
 	else
 		printf("back data : %d\n",err);		
-		
+			
 	err = deallocate_queue(&queue);
 	if( err == -1)
 		return 0;	

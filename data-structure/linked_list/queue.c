@@ -25,15 +25,14 @@ int deallocate_queue(queue_t** queue)
 		printf(" queue dealocation error\n");
 		return -1;
 	}
-	
-	free_rest_node( (*queue)->q_ptr);
+	free_rest_node( (*queue)->q_ptr);		// 헤더 노드 접근  
 	free(*queue);
 	
 	return 0;
 }
 void push_q(queue_t* queue, const int data)	// 데이터 삽입 
 {
-	insert_node(queue->q_ptr, data);	// node == queue->q_ptr  // 노드 생성 함수(헤더 다음 노드 생성)
+	insert_node(queue->q_ptr, data);	// node == queue->q_ptr (헤더 다음 노드 생성)
 	printf("push queue data : %d\n",data);
 }
 
@@ -51,12 +50,12 @@ int pop_q(queue_t* queue)
 	{
 		current_q_ptr = current_q_ptr->link;	
 	}
-	
 	int pop_data = current_q_ptr->link->data;  
-	delete_node(current_q_ptr); 
 	
+	delete_node(current_q_ptr); 
 	return pop_data;	
 }
+
 
 int front(queue_t* queue)
 {
