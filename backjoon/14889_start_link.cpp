@@ -4,59 +4,73 @@
 
 using namespace std;
 
-int n;
-int ans = 999999999;
-bool check;
-int s[21][21];
+int ans = 99999999;
+bool check[21];
+int arr[21][21];
 
-void dfs(int index)
-{
-	if(index == n/2)
+int n;
+
+void dfs(int player, int cnt)
+{	
+	cout << "cnt : " << cnt << ' ';
+	
+	cout << '\n';
+	
+	for ( int i=1; i<=n; i++)
+	{
+		cout << check[i] << ' ';
+	} 
+	cout << '\n';
+	
+	if(player == n/2)
 	{
 		int team_start = 0;
 		int team_link = 0;
 		
-		for(int i=0; i<n; i++)
+		for(int i=1; i<=n; i++)
 		{
-			for(int j=0; j<n; j++)
+			
+			for(int j=1; j<=n; j++)
 			{
-				
-				team_start += s[i][j];
-				team_link += s[i][j];
+				if(i==j) 
+					continue;
+			
+				if( check[i] && check[j])
+					team_start += arr[i][j];
+				if( !check[i] && !check[j]) 
+					team_link += arr[i][j];		
 			}
 		}
 		
-		int temp = abs(team_start-team_link);
-		if( ans > temp) ans = temp;	
-	}
-	
-	//if( index > n/2 )	return;
-	
-	for(int i=0; i<n; i++)
-	{
-		check[i] = false;
-		
-		dfs(index+1);
-		
-		check[i] = true;
-			
-	}
-	
-	
-}
 
+		ans = min(ans, abs(team_start-team_link));		
+		return;
+	}
+	
+	if(cnt > n )	return;
+	
+	check[cnt] = true;
+	dfs(player+1,cnt+1);
+	check[cnt] = false;
+	
+////////////////////////////////	
+	dfs(player, cnt+1); 
+}
 
 int main()
 {
 	cin >> n;	
-	for(int i=0; i<n; i++)
+	for(int i=1; i<=n; i++)
 	{
-		for(int j=0; j<n; j++)
+		for(int j=1; j<=n; j++)
 		{
-			cin >> s[i][j];
+			cin >> arr[i][j];
 		}
 	}
-	dfs(0);
+	cout << '\n';
+		
+	dfs(0, 1);
+	cout << ans;
 	
 	return 0;
 }
