@@ -12,16 +12,6 @@ int n;
 
 void dfs(int player, int cnt)
 {	
-	cout << "cnt : " << cnt << ' ';
-	
-	cout << '\n';
-	
-	for ( int i=1; i<=n; i++)
-	{
-		cout << check[i] << ' ';
-	} 
-	cout << '\n';
-	
 	if(player == n/2)
 	{
 		int team_start = 0;
@@ -47,13 +37,12 @@ void dfs(int player, int cnt)
 		return;
 	}
 	
-	if(cnt > n )	return;
+	if( cnt > n )	return;
 	
 	check[cnt] = true;
 	dfs(player+1,cnt+1);
 	check[cnt] = false;
-	
-////////////////////////////////	
+
 	dfs(player, cnt+1); 
 }
 
@@ -67,7 +56,6 @@ int main()
 			cin >> arr[i][j];
 		}
 	}
-	cout << '\n';
 		
 	dfs(0, 1);
 	cout << ans;
