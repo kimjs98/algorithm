@@ -5,20 +5,26 @@ using namespace std;
 int ans;
 int n, m;  // n : node, m : edge
 
-bool visit[2001];
-vector<int> arr[2001];
+bool visit[2000];
+vector<int> arr[2000];
 
-void Dfs(int x) {
+void Dfs(int index, int depth) {
 	
-	visit[x] = true;
-	for (int i=0; i<arr[x].size(); i++) {
-		int next = arr[x][i];
+	if (depth == 4) {
+		ans = 1;
+		return;
+	}
+		
+	visit[index] = true;
+	for (int i=0; i<arr[index].size(); i++) {
+		int next = arr[index][i];
+		
 		if (visit[next] == false ) {
-			Dfs(next);
+			Dfs(next, depth + 1 );
 		}
 		
 	}
-		
+	visit[index] = false;	
 }
 
 int main() {
@@ -31,17 +37,15 @@ int main() {
 		arr[a].push_back(b);
 		arr[b].push_back(a);
 	}
-	Dfs(0);
-
-#if 0
-	for(int i=0; i<n; i++) {
-		
-		for (int a: arr[i]) {
-			cout << a << ' ';
-		}
-		cout << '\n';
+	
+	for ( int i=0; i<n; i++) {
+		Dfs(i, 0);
+		if(ans)
+			break;
 	}
-#endif 	
+	
+	cout << ans;
+ 	
 	return 0;
 }
 
