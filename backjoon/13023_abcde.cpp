@@ -14,7 +14,6 @@ void Dfs(int index, int depth) {
 		ans = 1;
 		return;
 	}
-		
 	visit[index] = true;
 	for (int i=0; i<arr[index].size(); i++) {
 		int next = arr[index][i];
@@ -37,11 +36,12 @@ int main() {
 		arr[a].push_back(b);
 		arr[b].push_back(a);
 	}
-	
+
 	for ( int i=0; i<n; i++) {
 		Dfs(i, 0);
-		if(ans)
+		if(ans) {
 			break;
+		}
 	}
 	
 	cout << ans;
