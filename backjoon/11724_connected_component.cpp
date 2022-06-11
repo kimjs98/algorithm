@@ -1,49 +1,50 @@
-#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <queue>
 
 using namespace std;
 
-int n, m;
-bool check[499500];
-vector<int> arr[499500];
-
-int cnt;
+bool check[1001];
+vector<int> arr[1001];
 
 void Dfs(int index, int depth)
 {
 	check[index] = true;
-	
 	for (int i=0; i<arr[index].size(); i++)
 	{
 		int next = arr[index][i];
-		
-		if(check[next] == false)
+		if(check[next] == false )
 		{
 			Dfs(next, depth+1);	
 		}
 	}
-	
 }
 
 
 int main()
 {
+	int n, m;
 	cin >> n >> m;
 	
-	int a,b;
+	int a, b;
 	for(int i=0; i<m; i++)
 	{
 		cin >> a >> b;
+		
 		arr[a].push_back(b);
+		arr[b].push_back(a);
 	} 
-	
+
+	int cnt = 0;
 	for(int i=1; i<=n; i++)
 	{
-		Dfs( i, 0);
+		if (check[i] == false)
+		{
+			Dfs(i, 0);
+			cnt++;	
+		}
+	
 	}
+	cout << cnt;
 	
 	return 0;
 }
-
