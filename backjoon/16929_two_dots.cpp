@@ -6,13 +6,29 @@
 
 using namespace std;
 
-int n, m;
+int n, m, ans;
 
 char map[50][50];
 int dist[50][50];
 bool check[50][50];
 
-void Dfs(int y, int x) {
+int dx[] = {-1, 0, 1, 0};
+int dy[] = {0, -1, 0, 1};
+
+void Dfs(int y, int x, int depth, char color) {
+	
+	if(check[y][x] == true) {
+
+		if(depth - dist[y][x] >=3) {
+			ans = 1;
+			return;
+		}	
+		else
+			return;
+		
+	}
+	
+	dist[y][x] = depth;
 	
 	check[y][x] = true;
 	for(int i=0; i<4; i++) {
@@ -20,14 +36,11 @@ void Dfs(int y, int x) {
 		int ny = y + dy[i];
 		
 		if(nx>=0 && ny>=0 && nx<m && ny<n) {
-			if(check[ny][nx] == false) {
-				
-				Dfs(ny, nx);
-				
+			if( map[ny][nx] == color ) {
+				Dfs(ny, nx, depth+1, color);	
 			}
 		}
-	}
-	
+	}	
 }
 
 int main() {
@@ -42,12 +55,23 @@ int main() {
 		}
 	}
 	
+	ans = 0;
 	for(int i=0; i<n; i++) {	
 		for(int j=0; j<m; j++) {
 			
-			if()
+			if(!check[i][j] == true) {	
+				memset(dist, false, sizeof(dist));
+				Dfs(i, j, 0, map[i][j]);
+			
+			}
+			
 		}
 	}
+
+	if(ans)
+		cout << "YES";
+	else
+		cout << "NO";
 	
 	return 0;
 }
