@@ -25,14 +25,11 @@ void dfs(int player, int cnt)
 				if(i==j) 
 					continue;
 			
-				if( check[i] && check[j])
-					team_start += arr[i][j];
-				if( !check[i] && !check[j]) 
-					team_link += arr[i][j];		
+				if( check[i] && check[j])	team_start += arr[i][j];
+				if( !check[i] && !check[j]) team_link += arr[i][j];		
 			}
 		}
 		
-
 		ans = min(ans, abs(team_start-team_link));		
 		return;
 	}
@@ -42,7 +39,6 @@ void dfs(int player, int cnt)
 	check[cnt] = true;
 	dfs(player+1,cnt+1);
 	check[cnt] = false;
-
 	dfs(player, cnt+1); 
 }
 
