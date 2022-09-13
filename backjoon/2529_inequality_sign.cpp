@@ -42,6 +42,7 @@ void dfs(int index, string num)
 	for(int i=0; i<=9; i++)
 	{
 		if(check[i]) continue;
+		
 		check[i] = true;
 		dfs(index+1, num + to_string(i));
 		check[i] = false;
