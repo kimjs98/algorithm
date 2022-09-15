@@ -9,18 +9,14 @@ using namespace std;
 int map[MAX][MAX];
 bool check[MAX][MAX];
 
-
+int dy[] = {-1, 0, 1, 0};
 int dx[] = {0, 1, 0, -1};
-int dy[] = {1, 0, -1, 0};	// 0 ,1 ,2 ,3 
-
-//int dx[] = {-1, 0, 1, 0};
-//int dy[] = {0, 1, 0, -1};
 
 int n, m;
 int r, c, d;
 
 typedef struct{
-	int y;
+	int y; 
 	int x;
 
 }point;
@@ -29,8 +25,8 @@ queue<point> q;
 
 int Bfs() {
 	
-	q.push({c, r});
-	check[c][r] = true;
+	q.push({r, c});
+	check[r][c] = true;
 	
 	int cnt = 1;
 	while(!q.empty()) {
@@ -55,6 +51,8 @@ int Bfs() {
 				q.push({ny, nx});	  
 				cnt++;
 				check[ny][nx] = true;
+		
+				
 					
 				flag = true;
 				break;	
@@ -87,6 +85,6 @@ int main() {
 		}
 	}
 	cout << Bfs();
-	
+
 	return 0;
 }
