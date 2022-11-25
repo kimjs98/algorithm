@@ -1,77 +1,90 @@
-#include <algorithm>
-#include <cstring>
 #include <iostream>
-#include <stack>
-#include <queue>
+#include <string>
+
+#define DEBUG
+#define MAX 50
 
 using namespace std;
 
-int n, m, ans;
+int dy[] = { 0, -1, 0, 1 };
+int dx[] = { -1, 0, 1, 0 };
 
-char map[50][50];
-int dist[50][50];
-bool check[50][50];
+char map[MAX][MAX];
+bool check[MAX][MAX];
 
-int dx[] = {-1, 0, 1, 0};
-int dy[] = {0, -1, 0, 1};
+typedef struct {
+	int y, x;
 
-void Dfs(int y, int x, int depth, char color) {
-	
-	if(check[y][x] == true) {
+}pos_t;
+pos_t pos;
 
-		if(depth - dist[y][x] >=3) {
-			ans = 1;
-			return;
-		}	
-		else
-			return;
-		
-	}
-	
-	dist[y][x] = depth;
-	
+int n, m;
+bool ans;
+
+void Dfs(int y, int x, int depth) {
 	check[y][x] = true;
-	for(int i=0; i<4; i++) {
-		int nx = x + dx[i];
+	for (int i = 0; i < 4; i++) {
 		int ny = y + dy[i];
-		
-		if(nx>=0 && ny>=0 && nx<m && ny<n) {
-			if( map[ny][nx] == color ) {
-				Dfs(ny, nx, depth+1, color);	
+		int nx = x + dx[i];
+		if (ny >= 0 && nx >= 0 && ny < n && nx < m) {
+			if (map[ny][nx] == map[y][x] && !check[ny][nx])
+				Dfs(ny, nx, depth + 1);
+			else if (depth >= 3) {
+				if (pos.y == ny && pos.x == nx) {
+					ans = true;
+					return;
+				}
 			}
 		}
-	}	
+	}
+	check[y][x] = false;
+}
+
+void Input() {
+	cin >> n >> m;
+
+	string str;
+	for (int i = 0; i < n; i++) {
+		cin >> str;
+		for (int j = 0; j < m; j++) {
+			map[i][j] = str[j] - '\0';
+		}
+	}
+
+}
+
+void Solve() {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+
+			if (!check[i][j]) {
+				pos = { i, j };
+				Dfs(i, j, 0);
+				check[i][j] = true;
+			}
+		}
+	}
+
+	if (ans)
+		cout << "Yes";
+	else
+		cout << "No";
+
+}
+
+void Solution() {
+	Input();
+	Solve();
 }
 
 int main() {
 	
-	cin >> n >> m;
-	
-	string str;
-	for(int i=0; i<n; i++) {
-		cin >> str;
-		for(int j=0; j<m; j++) {
-			map[i][j] = str[j] - '\0';
-		}
-	}
-	
-	ans = 0;
-	for(int i=0; i<n; i++) {	
-		for(int j=0; j<m; j++) {
-			
-			if(!check[i][j] == true) {	
-				memset(dist, false, sizeof(dist));
-				Dfs(i, j, 0, map[i][j]);
-			
-			}
-			
-		}
-	}
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
 
-	if(ans)
-		cout << "YES";
-	else
-		cout << "NO";
-	
+	Solution();
+
 	return 0;
 }
+
