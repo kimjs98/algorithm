@@ -11,8 +11,6 @@ typedef struct {
 }pos_t;
 
 pos_t pos[MAX];
-int visit[MAX];
-
 int n, k;
 
 void Bfs(){
@@ -40,17 +38,10 @@ void Bfs(){
 				}
 				else {
 					int tmp = pos[x].location + 1;
-					
 					if(tmp == pos[nx].location) {
-						
 						q.push(nx);
 						pos[nx].cnt++;
 					}
-					else if(tmp < pos[nx].location){
-						pos[nx].location = tmp;
-					}
-					else;
-
 				}
 			}
 		}
